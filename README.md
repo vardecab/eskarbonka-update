@@ -1,6 +1,6 @@
 # eskarbonka-update
 
->Periodically check & get a notification if value was changed on website.
+>Periodically check & get a native macOS notification if value was changed on a website.
 
 <!-- Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cumanos sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. -->
 
@@ -14,6 +14,7 @@
 
 ## Release History
 
+- 0.2: Fully working code. Added extra things like `pickle` file to store value, comparison between old & new values, progress bar, native macOS notification. Fixed blocked user-agent and SSL certificate issue.   
 - 0.1: Initial release.
 
 ## Versioning
@@ -26,7 +27,8 @@ Using [SemVer](http://semver.org/).
 
 ## Acknowledgements
 
-<!-- - []() -->
+- [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
+- [alive-progress](https://github.com/rsalmei/alive-progress)
 
 <!-- ## Contributing -->
 
