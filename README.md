@@ -1,8 +1,8 @@
 # eSkarbonka-update
 
->Periodically check & get a native macOS notification if value was changed on a website.
+>Periodically check & get a native system notification if value was changed on a website.
 
-<!-- Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cumanos sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. -->
+In this case, get value from WOŚP's [eSkarbonka](https://eskarbonka.wosp.org.pl/5jcgfw).
 
 <!-- ![](screenshot.png) -->
 
@@ -14,6 +14,7 @@
 
 ## Release History
 
+- 0.5: Windows notifications. 
 - 0.4: Prep for Windows notifications. 
 - 0.3: Changed macOS notifications backend. 
 - 0.2: Fully working code. Added extra things like `pickle` file to store value, comparison between old & new values, progress bar, native macOS notifications. Fixed blocked user-agent and SSL certificate issue.   
@@ -33,7 +34,9 @@ Using [SemVer](http://semver.org/).
 - [f-strings](https://realpython.com/python-f-strings/)
 - [pync](https://github.com/setem/pync)
 - [terminal-notifier](https://github.com/julienXX/terminal-notifier/blob/master/README.markdown)
-<!-- - [alive-progress](https://github.com/rsalmei/alive-progress) -->
+- [alive-progress](https://github.com/rsalmei/alive-progress)
+- [win10toast](https://github.com/jithurjacob/Windows-10-Toast-Notifications)
+- [win10toast-persist](https://pypi.org/project/win10toast-persist/)
 
 <!-- ## Contributing -->
 

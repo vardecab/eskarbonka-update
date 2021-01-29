@@ -2,3 +2,7 @@ TODO
 automate.sh
 build-app.scpt
 .ds_store
+data/*
+!data/.gitkeep
+icons/wosp-icon.png 
+automate-*
