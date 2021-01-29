@@ -12,6 +12,7 @@ import os # show notification on macOS; https://stackoverflow.com/questions/1765
 import webbrowser # open browser 
 import time # delay execution; https://stackoverflow.com/questions/3327775/can-the-execution-of-statements-in-python-be-delayed
 from alive_progress import alive_bar # progress bar
+import pync # macOS notification
 
 # === start + run time ===
 
@@ -22,14 +23,7 @@ start = datetime.now()  # run time
 
 page_url = "https://eskarbonka.wosp.org.pl/5jcgfw" # *NOTE: Traceback; This is probably because of 'mod_security' or some similar server security feature which blocks known spider/bot user agents (urllib uses something like python urllib/3.3.0, it's easily detected). // https://stackoverflow.com/questions/16627227/http-error-403-in-python-3-web-scraping 
 
-# === macOS notification ===
-
-def notify(title, text):
-    os.system("""
-              osascript -e 'display notification "{}" with title "{}"'
-              """.format(text, title))
-
-# === file to store value ===
+# === file to store data ===
 
 filename = "value.pk" 
 
@@ -53,7 +47,7 @@ except IOError:
     print ("First run - no file exists.")
 
 value = int(value[0]) # select first match from regex
-# value = 110 # debug
+# value =  # debug
 # print ("value is", type(value)) # debug
 # print ("stored_value is", type(stored_value)) # debug
 
@@ -68,25 +62,21 @@ except IOError:
 # === compare values ===
 
 try: # first run failsafe 
+
     stored_value = stored_value 
+
     if value == stored_value: 
-        # !FIX: translate back to PL and encode special characters
-        print ("Nothing has changed. The current amount is:", value, "PLN.")
-        notify("eskarbonka-update", "Nothing has changed.") # macOS notification
+        print ("Nothing has changed. The current amount is:", value, "PLN.") # debug
+        pync.notify(f'"W eSkarbonce jest {value} zł."', title='eSkarbonka', subtitle='Nic się nie zmieniło.', open="https://eskarbonka.wosp.org.pl/5jcgfw", contentImage="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/WO%C5%9AP.svg/1200px-WO%C5%9AP.svg.png", sound="Funk") # appIcon="" doesn't work 
+
     if value > stored_value: 
-        print ("""There's more! New amount:""", value, """PLN. It's""", value-stored_value, "PLN more!")
-        notify("eskarbonka-update", "We have more!") # TODO: add value
-        # !FIX: can't have "That's" due to EOF problems
-        pause_duration = 5 # wait 5 seconds before opening
-        print ("Waiting for", pause_duration, "seconds before opening URL...")
-        with alive_bar(pause_duration, bar="circles", spinner="dots_waves") as bar: # progress bar
-            for second in range(0,pause_duration): # wait 5 seconds in total
-                time.sleep(1) # wait 5 x 1 sec
-                bar() # update progress bar
-        webbrowser.open(page_url) # open URL
+        print ("""There's more! New amount:""", value, """PLN. It's""", value-stored_value, "PLN more!") # debug
+        pync.notify(f'"W eSkarbonce jest teraz {value} zł."', title='eSkarbonka', subtitle=f'"Jest więcej o {value-stored_value} zł!"', open="https://eskarbonka.wosp.org.pl/5jcgfw", contentImage="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/WO%C5%9AP.svg/1200px-WO%C5%9AP.svg.png", sound="Funk")
+
     if value < stored_value: 
-        print ("Something is wrong... The new amount is lower than the previous amount.")
-        notify("eskarbonka-update", "Something is wrong... The new amount is lower than the previous amount.")
+        print ("Something is wrong... The new amount is lower than the previous amount.") # debug
+        pync.notify(f'"W eSkarbonce jest teraz {value} zł."', title='eSkarbonka', subtitle='Coś jest nie tak... Jest mniej niż było.', open="https://eskarbonka.wosp.org.pl/5jcgfw", contentImage="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/WO%C5%9AP.svg/1200px-WO%C5%9AP.svg.png", sound="Funk")
+
 except NameError:
     print ("""First run, couldn't compare to anything.""")
 

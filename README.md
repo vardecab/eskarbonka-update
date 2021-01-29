@@ -1,4 +1,4 @@
-# eskarbonka-update
+# eSkarbonka-update
 
 >Periodically check & get a native macOS notification if value was changed on a website.
 
@@ -14,6 +14,7 @@
 
 ## Release History
 
+- 0.3: Changed macOS notification backend. 
 - 0.2: Fully working code. Added extra things like `pickle` file to store value, comparison between old & new values, progress bar, native macOS notification. Fixed blocked user-agent and SSL certificate issue.   
 - 0.1: Initial release.
 
@@ -28,7 +29,10 @@ Using [SemVer](http://semver.org/).
 ## Acknowledgements
 
 - [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
-- [alive-progress](https://github.com/rsalmei/alive-progress)
+- [f-strings](https://realpython.com/python-f-strings/)
+- [pync](https://github.com/setem/pync)
+- [terminal-notifier](https://github.com/julienXX/terminal-notifier/blob/master/README.markdown)
+<!-- - [alive-progress](https://github.com/rsalmei/alive-progress) -->
 
 <!-- ## Contributing -->
 
