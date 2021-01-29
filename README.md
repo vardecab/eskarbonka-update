@@ -37,6 +37,7 @@ Using [SemVer](http://semver.org/).
 - [alive-progress](https://github.com/rsalmei/alive-progress)
 - [win10toast](https://github.com/jithurjacob/Windows-10-Toast-Notifications)
 - [win10toast-persist](https://pypi.org/project/win10toast-persist/)
+- [WOŚP icon](https://upload.wikimedia.org/wikipedia/en/thumb/1/14/WO%C5%9AP.svg/1200px-WO%C5%9AP.svg.png)
 
 <!-- ## Contributing -->
 
