@@ -2,7 +2,7 @@
 
 >Periodically check & get a native system notification if value was changed on a website.
 
-In this case, get value from WOŚP's [eSkarbonka](https://eskarbonka.wosp.org.pl/5jcgfw).
+In this case, get value from my WOŚP's [eSkarbonka](https://eskarbonka.wosp.org.pl/5jcgfw).
 
 <!-- ![](screenshot.png) -->
 
