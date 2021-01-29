@@ -14,8 +14,9 @@
 
 ## Release History
 
-- 0.3: Changed macOS notification backend. 
-- 0.2: Fully working code. Added extra things like `pickle` file to store value, comparison between old & new values, progress bar, native macOS notification. Fixed blocked user-agent and SSL certificate issue.   
+- 0.4: Prep for Windows notifications. 
+- 0.3: Changed macOS notifications backend. 
+- 0.2: Fully working code. Added extra things like `pickle` file to store value, comparison between old & new values, progress bar, native macOS notifications. Fixed blocked user-agent and SSL certificate issue.   
 - 0.1: Initial release.
 
 ## Versioning

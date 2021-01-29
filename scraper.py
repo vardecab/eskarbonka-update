@@ -13,10 +13,11 @@ import webbrowser # open browser
 import time # delay execution; https://stackoverflow.com/questions/3327775/can-the-execution-of-statements-in-python-be-delayed
 from alive_progress import alive_bar # progress bar
 import pync # macOS notification
+from sys import platform # check platform (Windows/Linux/macOS); macOS == darwin, Windows == win32
 
 # === start + run time ===
 
-print ("Starting...")
+print("Starting...")
 start = datetime.now()  # run time
 
 # === URL to scrape ===
@@ -29,12 +30,12 @@ filename = "value.pk"
 
 # === scrape ===
 
-print ("Opening page...")
-print (page_url) # debug
+print("Opening page...")
+print(page_url) # debug
 request = Request(page_url, headers={'User-Agent': 'XYZ/3.0'}) # fix: Request -> blocked user agent
 page = urlopen(request, timeout=3, context=ssl.create_default_context(cafile=certifi.where())) # fix: context -> certificate issue
 
-print ("Scraping page...")
+print("Scraping page...")
 soup = BeautifulSoup(page, 'html.parser')  # parse the page
 
 get_content = soup.find("div", {"class":"wosp-price-ind text-big mt-5 mb-3"}).text # get div content
@@ -44,12 +45,12 @@ try: # might crash on first run
     with open(filename, 'rb') as file: # load your data back to memory so we can save new value; NOTE: b = binary
         stored_value = pickle.load(file)
 except IOError:
-    print ("First run - no file exists.")
+    print("First run - no file exists.")
 
 value = int(value[0]) # select first match from regex
 # value =  # debug
-# print ("value is", type(value)) # debug
-# print ("stored_value is", type(stored_value)) # debug
+# print("value is", type(value)) # debug
+# print("stored_value is", type(stored_value)) # debug
 
 # === store value for further use ===
 
@@ -57,7 +58,7 @@ try:
     with open(filename, 'wb') as file: # open pickle file
         pickle.dump(value, file) # dump your data into the file
 except IOError: 
-    print ("""File doesn't exist.""")
+    print("""File doesn't exist.""")
     
 # === compare values ===
 
@@ -66,20 +67,31 @@ try: # first run failsafe
     stored_value = stored_value 
 
     if value == stored_value: 
-        print ("Nothing has changed. The current amount is:", value, "PLN.") # debug
-        pync.notify(f'"W eSkarbonce jest {value} zł."', title='eSkarbonka', subtitle='Nic się nie zmieniło.', open="https://eskarbonka.wosp.org.pl/5jcgfw", contentImage="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/WO%C5%9AP.svg/1200px-WO%C5%9AP.svg.png", sound="Funk") # appIcon="" doesn't work 
+        print("Nothing has changed. The current amount is:", value, "PLN.") # debug
+        if platform == "darwin":
+            pync.notify(f'"W eSkarbonce jest {value} zł."', title='eSkarbonka', subtitle='Nic się nie zmieniło.', open="https://eskarbonka.wosp.org.pl/5jcgfw", contentImage="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/WO%C5%9AP.svg/1200px-WO%C5%9AP.svg.png", sound="Funk") # appIcon="" doesn't work 
+        elif platform == "win32":
+            # toaster.show_toast("title", "body", icon_path="path")
+            # webbrowser.open()
+            print()
 
     if value > stored_value: 
-        print ("""There's more! New amount:""", value, """PLN. It's""", value-stored_value, "PLN more!") # debug
-        pync.notify(f'"W eSkarbonce jest teraz {value} zł."', title='eSkarbonka', subtitle=f'"Jest więcej o {value-stored_value} zł!"', open="https://eskarbonka.wosp.org.pl/5jcgfw", contentImage="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/WO%C5%9AP.svg/1200px-WO%C5%9AP.svg.png", sound="Funk")
+        print("""There's more! New amount:""", value, """PLN. It's""", value-stored_value, "PLN more!") # debug
+        if platform == "darwin":
+            pync.notify(f'"W eSkarbonce jest teraz {value} zł."', title='eSkarbonka', subtitle=f'"Jest więcej o {value-stored_value} zł!"', open="https://eskarbonka.wosp.org.pl/5jcgfw", contentImage="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/WO%C5%9AP.svg/1200px-WO%C5%9AP.svg.png", sound="Funk")
+        elif platform == "win32":
+            print()
 
     if value < stored_value: 
-        print ("Something is wrong... The new amount is lower than the previous amount.") # debug
-        pync.notify(f'"W eSkarbonce jest teraz {value} zł."', title='eSkarbonka', subtitle='Coś jest nie tak... Jest mniej niż było.', open="https://eskarbonka.wosp.org.pl/5jcgfw", contentImage="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/WO%C5%9AP.svg/1200px-WO%C5%9AP.svg.png", sound="Funk")
+        print("Something is wrong... The new amount is lower than the previous amount.") # debug
+        if platform == "darwin":
+            pync.notify(f'"W eSkarbonce jest teraz {value} zł."', title='eSkarbonka', subtitle='Coś jest nie tak... Jest mniej niż było.', open="https://eskarbonka.wosp.org.pl/5jcgfw", contentImage="https://upload.wikimedia.org/wikipedia/en/thumb/1/14/WO%C5%9AP.svg/1200px-WO%C5%9AP.svg.png", sound="Funk")
+        elif platform == "win32":
+            print()
 
 except NameError:
-    print ("""First run, couldn't compare to anything.""")
+    print("""First run, couldn't compare to anything.""")
 
 # === run time ===
 
-print ("Script run time:", datetime.now()-start)
+print("Script run time:", datetime.now()-start)
