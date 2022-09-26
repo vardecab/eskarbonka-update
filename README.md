@@ -1,5 +1,12 @@
 # eSkarbonka-update
 
+![Not Maintained](https://img.shields.io/badge/Maintenance%20Level-Not%20Maintained-yellow.svg)
+
+<br>
+<hr>
+<br>
+<br>
+
 >Periodically check & get a native system notification if value was changed on a website.
 
 In this case, get value from my WOŚP's [eSkarbonka](https://eskarbonka.wosp.org.pl/5jcgfw).
